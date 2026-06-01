@@ -11,20 +11,27 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shweta_portfolio/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('Theme toggle and landing experience smoke test', (
+    WidgetTester tester,
+  ) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MyApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Verify that the title text exists
+    expect(find.text('Welcome to My Portfolio'), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    // Verify default theme is dark mode, so we show the light_mode icon to switch to light mode
+    expect(find.byIcon(Icons.light_mode), findsOneWidget);
+    expect(find.byIcon(Icons.dark_mode), findsNothing);
+
+    // Tap the theme toggle button and trigger a frame.
+    await tester.tap(find.byTooltip('Toggle Theme'));
     await tester.pump();
+    // Use pumpAndSettle to wait for all transitions (AnimatedSwitcher & EntranceAnimations) to settle
+    await tester.pumpAndSettle();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Verify that the theme toggled to light mode, and icon updated to dark_mode
+    expect(find.byIcon(Icons.dark_mode), findsOneWidget);
+    expect(find.byIcon(Icons.light_mode), findsNothing);
   });
 }
