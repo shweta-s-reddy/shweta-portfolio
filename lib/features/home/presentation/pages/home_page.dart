@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         actions: [
-          if (!isMobile) ...[
+          ...[
             HoverNavButton(text: 'About', onPressed: () {}),
             HoverNavButton(text: 'Projects', onPressed: () {}),
             HoverNavButton(text: 'Contact', onPressed: () {}),
