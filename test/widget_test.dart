@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:shweta_portfolio/main.dart';
+import 'package:shweta_portfolio/app/app.dart';
 
 void main() {
   testWidgets('Theme toggle and landing experience smoke test', (
